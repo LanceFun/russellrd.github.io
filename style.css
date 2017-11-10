@@ -75,3 +75,9 @@ span {
 .two {
     font-size: 110%;
 }
+@media only screen and (max-width: 768px) {
+    li a {
+    font-size: 90%;
+}
+
+}
