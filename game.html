@@ -1,0 +1,46 @@
+<DOCTYPE html>
+<html lang"en">
+<head>
+  <meta charset="UFT-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nosy Blogger</title>
+  <link type="text/css" rel="stylesheet" href="style.css" />
+  <link href="css/font-awesome.min.css" rel="stylesheet"/>
+  <link rel="icon" type="image/ico" href="favicon.ico"/>
+      <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/CUBETHON.json", {onProgress: UnityProgress});
+    </script>
+</head>
+<body>
+<section class="intro"><div class="intro-inner"></div></section>
+<header>
+  <div id="header-inner">
+    <nav>
+    <a href="#" id="menu-icon"></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="october.html">October 16/1988</a></li>
+      <li><a href="september.html">September 2/1988</a></li>
+      <li><a href="other.html">Other Blog Posts</a></li>
+    </ul>
+    </nav>
+  </div>
+</header>
+<section id="all" class="half">
+      <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+      </div>
+    </div>
+</footer>
+<footer class="second">
+  <p>&copy; Nosy Blogger <br> Made from scratch by Russell Davidson</p>
+</footer>
+</section>
+</body>
+</html>
