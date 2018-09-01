@@ -1,13 +1,19 @@
 var population;
 var lifeP;
 var count = 0;
-var generation = 1;
+var generation = 0;
 var genP;
+var rocketsP;
 var target;
+var colors;
 
 const lifespan = 400;
 const maxforce = 0.2;
 const mutationrate = 0.01;
+const startpopulation = 500;
+const addpopulation = 100;
+const maxpopulation = 500;
+const changepop = false;
 
 rx = 100;
 ry = 150;
@@ -16,26 +22,42 @@ rh = 10;
 
 function setup() {
     createCanvas(400, 300);
-    population = new Population(1000);
+    population = new Population(startpopulation);
     lifeP = createP();
     genP = createP();
+    rocketsP = createP();
     target = createVector(width/2, 50);
 }
 
 function draw() {
+    if (colors) {
+        fill(colors.r, colors.b, colors.g, 150);
+    } else {
+        fill(255, 150);
+    }
     background(0);
     population.run();
     lifeP.html(count);
     genP.html(generation);
+    rocketsP.html(population.popsize);
 
     count++;
     if(count == lifespan) {
+        if (changepop) {
+            if (population.popsize < maxpopulation) {
+                population.popsize += addpopulation;
+            }
+            population.fillemty();
+        }
         population.evaluate();
         population.selection();
+        population.randcolor();
+        colors =  population.randcolor();
         generation++;
         count = 0;
     }
-
+    
+    noStroke();
     fill(255);
     rect(100, 150, 200, 10);
 
@@ -87,6 +109,23 @@ function Population(popsize) {
             newRockets[i] = new Rocket(child);
         }
         this.rockets = newRockets;
+    }
+
+    this.fillemty = function() {
+        for (var i = 0; i < this.popsize; i++) {
+            if (this.rockets[i] === undefined) {
+                this.rockets[i] = new Rocket();
+                console.log(i);
+            }
+        }
+    }
+
+    this.randcolor = function() {
+        return {
+            r: random(255),
+            b: random(255),
+            g: random(255)
+        }
     }
 
     this.run = function() {
@@ -192,7 +231,6 @@ function Rocket(dna) {
     this.show = function() {
         push();
         noStroke();
-        fill(255, 150);
         translate(this.pos.x, this.pos.y);
         rotate(this.vel.heading());
         rectMode(CENTER);
